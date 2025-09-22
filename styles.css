@@ -192,6 +192,43 @@ main {
     transition: background-color 0.3s, border-color 0.3s, color 0.3s;
     font-weight: normal;
     text-align: center;
+    position: relative;
+    user-select: none;
+}
+
+.modalities-label input[type="checkbox"] {
+    display: none;
+}
+
+.modalities-label input[type="checkbox"]:checked + span {
+    background-color: var(--secondary-color);
+    color: white;
+    border-color: var(--secondary-color);
+}
+
+.modalities-label span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.modalities-label input[type="checkbox"]:checked + span::after {
+    content: '✓';
+    font-size: 1.2em;
+    color: white;
+    margin-left: 0.5em;
+}
+}
+
+.modalities-label {
+    cursor: pointer;
+    border: 2px solid var(--light-gray);
+    padding: 12px;
+    border-radius: 8px;
+    transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+    font-weight: normal;
+    text-align: center;
 }
 
 .modalities-label input[type="checkbox"] {
