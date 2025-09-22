@@ -1,6 +1,7 @@
 :root {
-    --primary-color: #3f51b5;
-    --secondary-color: #4CAF50;
+    --primary-color: #3f51b5; /* Azul oscuro para botones y énfasis */
+    --secondary-color: #4CAF50; /* Verde vibrante para CTA principal y ticks */
+    --accent-color: #FFC107; /* Amarillo para botones secundarios */
     --text-color: #333;
     --background-color: #f0f2f5;
     --card-bg-color: #ffffff;
@@ -14,11 +15,12 @@ body {
     color: var(--text-color);
     margin: 0;
     line-height: 1.6;
+    overflow-x: hidden; /* Evita scroll horizontal por animaciones */
 }
 
 /* Header & Hero Section */
 .hero-section {
-    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://novalithmc.github.io/novastudios/assets/images/header-bg.jpg') no-repeat center center/cover;
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://novalithmc.github.io/novastudios/assets/images/header-bg.jpg') no-repeat center center/cover;
     height: 100vh;
     display: flex;
     align-items: center;
@@ -27,9 +29,22 @@ body {
     text-align: center;
     box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     position: relative;
+    overflow: hidden; /* Oculta cubos que salgan del área */
+}
+
+#minecraftCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* Para que esté detrás del contenido del héroe */
+    opacity: 0.3; /* Hace que los cubos sean sutiles */
 }
 
 .hero-content {
+    position: relative; /* Asegura que esté por encima del canvas */
+    z-index: 2;
     animation: fadeIn 2s ease-in-out;
 }
 
@@ -43,6 +58,14 @@ body {
     font-weight: 400;
 }
 
+.hero-buttons {
+    display: flex;
+    flex-wrap: wrap; /* Permite que los botones se envuelvan en pantallas pequeñas */
+    gap: 1em; /* Espacio entre los botones */
+    justify-content: center;
+    margin-top: 2em;
+}
+
 .cta-button {
     background-color: var(--secondary-color);
     color: white;
@@ -52,7 +75,6 @@ body {
     font-size: 1.1em;
     font-weight: 700;
     cursor: pointer;
-    margin-top: 2em;
     transition: background-color 0.3s ease, transform 0.3s ease;
     box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
@@ -60,6 +82,14 @@ body {
 .cta-button:hover {
     background-color: #45a049;
     transform: translateY(-3px);
+}
+
+.secondary-cta {
+    background-color: var(--accent-color); /* Color diferente para los botones secundarios */
+}
+
+.secondary-cta:hover {
+    background-color: #e0b000;
 }
 
 /* Main Content Sections */
@@ -196,11 +226,13 @@ main {
     user-select: none;
 }
 
-.modalities-label input[type="checkbox"] {
+.modalities-label input[type="checkbox"],
+.modalities-label input[type="radio"] {
     display: none;
 }
 
-.modalities-label input[type="checkbox"]:checked + span {
+.modalities-label input[type="checkbox"]:checked + span,
+.modalities-label input[type="radio"]:checked + span {
     background-color: var(--secondary-color);
     color: white;
     border-color: var(--secondary-color);
@@ -213,34 +245,14 @@ main {
     transition: all 0.3s ease;
 }
 
-.modalities-label input[type="checkbox"]:checked + span::after {
+.modalities-label input[type="checkbox"]:checked + span::after,
+.modalities-label input[type="radio"]:checked + span::after {
     content: '✓';
     font-size: 1.2em;
     color: white;
     margin-left: 0.5em;
 }
-}
-
-.modalities-label {
-    cursor: pointer;
-    border: 2px solid var(--light-gray);
-    padding: 12px;
-    border-radius: 8px;
-    transition: background-color 0.3s, border-color 0.3s, color 0.3s;
-    font-weight: normal;
-    text-align: center;
-}
-
-.modalities-label input[type="checkbox"] {
-    display: none;
-}
-
-.modalities-label input[type="checkbox"]:checked + span {
-    background-color: var(--secondary-color);
-    color: white;
-    border-color: var(--secondary-color);
-}
-
+        
 .submit-button {
     background-color: var(--primary-color);
     color: white;
@@ -289,5 +301,10 @@ footer {
 
     .hero-content h1 {
         font-size: clamp(2em, 6vw, 3.5em);
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+        align-items: center;
     }
 }
