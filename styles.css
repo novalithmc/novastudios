@@ -1,0 +1,136 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+header {
+    background-color: #3f51b5;
+    color: white;
+    text-align: center;
+    padding: 2em 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    font-size: 2.5em;
+    margin: 0;
+}
+
+main {
+    max-width: 800px;
+    margin: 2em auto;
+    padding: 0 1em;
+}
+
+.services {
+    background-color: #fff;
+    padding: 2em;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    text-align: center;
+}
+
+.services ul {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+    margin-top: 1.5em;
+}
+
+.services li {
+    font-size: 1.1em;
+    margin-bottom: 0.8em;
+    display: flex;
+    align-items: center;
+}
+
+.services li::before {
+    content: '';
+    margin-right: 10px;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    cursor: pointer;
+    margin-top: 2em;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+form {
+    background-color: #fff;
+    padding: 2em;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    margin-top: 2em;
+}
+
+form h2 {
+    text-align: center;
+    margin-bottom: 1.5em;
+}
+
+form label {
+    display: block;
+    margin-top: 1em;
+    font-weight: bold;
+}
+
+form input[type="text"], form select, form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 0.5em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.modalities {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 1em;
+}
+
+.modalities input[type="checkbox"] {
+    display: none;
+}
+
+.modalities label {
+    cursor: pointer;
+    border: 2px solid #ddd;
+    padding: 10px 15px;
+    border-radius: 20px;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    font-weight: normal;
+}
+
+.modalities input[type="checkbox"]:checked + label {
+    background-color: #4CAF50;
+    color: white;
+    border-color: #4CAF50;
+}
+
+form button[type="submit"] {
+    width: 100%;
+    margin-top: 2em;
+}
+
+footer {
+    text-align: center;
+    padding: 1em 0;
+    color: #777;
+    margin-top: 2em;
+}
