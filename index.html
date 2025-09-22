@@ -1,85 +1,43 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NovaStudio's - Servidores de Minecraft</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-</head>
-<body>
+<!DOCTYPE html>  
+<html lang="es">  
+<head>  
+  <meta charset="UTF-8" />  
+  <meta name="viewport" content="width=device-width, initial-scale=1" />  
+  <title>NovaStudio's - Servidores Minecraft</title>  
+  <style>  
+    :root{  
+      --bg: #0b1020;  
+      --card: #141a28;  
+      --text: #e8f0ff;  
+      --muted: #a3aecb;  
+      --accent: #7bd389;  
+      --radius: 14px;  
+    }  
 
-    <header>
-        <h1>NovaStudio's</h1>
-        <p>Creando la experiencia de Minecraft perfecta para tu comunidad.</p>
-    </header>
+    * { box-sizing: border-box; }  
+    html, body { height: 100%; margin: 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background: #0b0f1a; color: var(--text); }  
 
-    <main>
-        <section class="services">
-            <h2>Nuestros Servicios</h2>
-            <ul>
-                <li>✅ Servidores sin lag y completamente optimizados.</li>
-                <li>🛠️ Creación de plugins personalizados para características únicas.</li>
-                <li>🖼️ Diseño de lobbies y mapas personalizados.</li>
-                <li>🚀 Asesoramiento y soporte para tu proyecto.</li>
-            </ul>
-            <button id="showFormBtn">Pedir Servidor</button>
-        </section>
-        
-       <form id="orderForm" action="https://script.google.com/macros/s/AKfycbzFmH_hw6CqFdiw4FaG02-G046TcMf3ZkEZeKx0cECAN-YTOfmUNRT2kB36e4ss-wgT/exec" method="POST" style="display: none;">
-            <h2>Configura tu Servidor</h2>
-            <label for="serverName">Nombre del Servidor:</label>
-            <input type="text" id="serverName" name="serverName" required>
+    .container { width: min(1100px, 92%); margin: 0 auto; padding: 1rem 0; }  
 
-            <label for="serverVersion">Versión (1.8 - 1.21):</label>
-            <select id="serverVersion" name="serverVersion" required>
-                <option value="1.8">1.8</option>
-                <option value="1.9">1.9</option>
-                <option value="1.10">1.10</option>
-                <option value="1.11">1.11</option>
-                <option value="1.12">1.12</option>
-                <option value="1.13">1.13</option>
-                <option value="1.14">1.14</option>
-                <option value="1.15">1.15</option>
-                <option value="1.16">1.16</option>
-                <option value="1.17">1.17</option>
-                <option value="1.18">1.18</option>
-                <option value="1.19">1.19</option>
-                <option value="1.20">1.20</option>
-                <option value="1.21">1.21</option>
-            </select>
+    .site-header { position: sticky; top: 0; z-index: 50; backdrop-filter: saturate(1.2) blur(6px); background: rgba(10,12,20,.8); border-bottom: 1px solid rgba(255,255,255,.08); }  
+    .brand { font-weight: 800; letter-spacing: .5px; }  
+    .menu { list-style: none; display: flex; gap: 1rem; padding: 0; margin: 0; }  
+    .menu a { color: var(--text); text-decoration: none; padding: .5rem; border-radius: 6px; }  
+    .menu a:hover { background: rgba(255,255,255,.08); }  
 
-            <label>Modalidades:</label>
-            <div class="modalities">
-                <input type="checkbox" id="survival" name="modalities" value="Survival">
-                <label for="survival">Survival</label>
+    .hero { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 2rem; align-items: center; padding: 2.5rem 0; }  
+    .hero-card { padding: 2rem; border-radius: var(--radius); background: linear-gradient(135deg, rgba(20,25,40,.95), rgba(20,25,40,.75)); border: 1px solid rgba(255,255,255,.08); transform: translateY(20px); opacity: 0; transition: transform .6s cubic-bezier(.22,.8,.32,1), opacity .6s ease; }  
+    .hero-visual { height: 260px; display: grid; place-items: center; border-radius: var(--radius); background: linear-gradient(135deg, rgba(12,14,24,.92), rgba(8,12,20,.92)); border: 1px solid rgba(255,255,255,.08); transform: translateY(20px); opacity: 0; transition: transform .6s cubic-bezier(.22,.8,.32,1), opacity .6s ease; }  
+    .visual-art { width: 120px; height: 120px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #7bd389, #2b8e5d); box-shadow: 0 6px 20px rgba(0,0,0,.4); }  
 
-                <input type="checkbox" id="creative" name="modalities" value="Creativo">
-                <label for="creative">Creativo</label>
+    .cta { display: inline-block; padding: .9rem 1.25rem; border-radius: 999px; background: linear-gradient(135deg, #5bd3a2, #1db954); color: #062a18; font-weight: 700; text-decoration: none; border: 0; cursor: pointer; }  
+    .cta:hover { transform: translateY(-1px); }  
 
-                <input type="checkbox" id="parkour" name="modalities" value="Parkour">
-                <label for="parkour">Parkour</label>
+    .section { padding: 2rem 0; }  
 
-                <input type="checkbox" id="bedwars" name="modalities" value="Bedwars">
-                <label for="bedwars">Bedwars</label>
+    .services { padding: 1rem 0 2rem; }  
 
-                <input type="checkbox" id="skyblock" name="modalities" value="Skyblock">
-                <label for="skyblock">Skyblock</label>
-            </div>
+    .service-list { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 1rem; }  
+    .service-list li { background: rgba(255,255,255,.04); padding: .5rem 1rem; border-radius: 999px; border: 1px solid rgba(255,255,255,.08); }  
 
-            <label for="description">Descripción del servidor:</label>
-            <textarea id="description" name="description" rows="5" required></textarea>
-
-            <button type="submit">Enviar Solicitud</button>
-        </form>
-    </main>
-
-    <footer>
-        <p>&copy; 2024 NovaStudio's. Todos los derechos reservados.</p>
-    </footer>
-
-    <script src="script.js"></script>
-</body>
-</html>
+    .
