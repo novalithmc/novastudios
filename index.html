@@ -497,33 +497,29 @@
         <section id="testimonials-section" class="section">
             <h2>Lo que Dicen Nuestros Clientes</h2>
             <div class="testimonials-grid">
-                <div class="card testimonial-card">
-                    <p>"NovaStudio's hizo un trabajo increíble. El servidor va súper fluido y la comunidad lo ama."</p>
-                    <div class="client-info">
-                        <img src="https://novalithmc.github.io/novastudios/assets/images/client1.png" alt="Perfil del cliente 1">
-                        <span class="client-name">Alex M.</span>
-                    </div>
                 </div>
-                <div class="card testimonial-card">
-                    <p>"El mapa que nos crearon es una obra de arte. La calidad de los detalles es impresionante."</p>
-                    <div class="client-info">
-                        <img src="https://novalithmc.github.io/novastudios/assets/images/client2.png" alt="Perfil del cliente 2">
-                        <span class="client-name">Luna G.</span>
-                    </div>
-                </div>
-                <div class="card testimonial-card">
-                    <p>"Me ayudaron con un plugin personalizado y funcionó a la perfección. Gran soporte y rapidez."</p>
-                    <div class="client-info">
-                        <img src="https://novalithmc.github.io/novastudios/assets/images/client3.png" alt="Perfil del cliente 3">
-                        <span class="client-name">Chris P.</span>
-                    </div>
-                </div>
-            </div>
         </section>
         
         <form id="serverOrderForm" action="https://script.google.com/macros/s/AKfycbzFmH_hw6CqFdiw4FaG02-G046TcMf3ZkEZeKx0cECAN-YTOfmUNRT2kB36e4ss-wgT/exec" method="POST" style="display: none;">
             <div class="form-container">
                 <h2>¡Solicita tu Servidor Personalizado!</h2>
+                
+                <label>Plan de Servidor:</label>
+                <div class="modalities-grid">
+                    <label class="modalities-label">
+                        <input type="radio" name="serverPlan" value="Paquete Básico" required>
+                        <span>Paquete Básico</span>
+                    </label>
+                    <label class="modalities-label">
+                        <input type="radio" name="serverPlan" value="Paquete Estándar" required>
+                        <span>Paquete Estándar</span>
+                    </label>
+                    <label class="modalities-label">
+                        <input type="radio" name="serverPlan" value="Paquete Pro" required>
+                        <span>Paquete Pro</span>
+                    </label>
+                </div>
+                
                 <label for="serverName">Nombre del Servidor:</label>
                 <input type="text" id="serverName" name="serverName" required>
 
@@ -560,7 +556,10 @@
 
                 <label for="serverDescription">Descripción del servidor:</label>
                 <textarea id="serverDescription" name="serverDescription" rows="5" required></textarea>
-
+                
+                <p>Nos pondremos en contacto contigo por Discord para confirmar los detalles y el precio final.</p>
+                <a href="https://www.paypal.com/paypalme/TU_USUARIO_DE_PAYPAL" target="_blank" class="submit-button">Pagar con PayPal</a>
+                
                 <button type="submit" class="submit-button">Enviar Solicitud de Servidor</button>
             </div>
         </form>
@@ -613,6 +612,9 @@
                 <label for="mapDescription">Descripción detallada del mapa:</label>
                 <textarea id="mapDescription" name="mapDescription" rows="5" required></textarea>
 
+                <p>Nos pondremos en contacto contigo por Discord para confirmar los detalles y el precio final.</p>
+                <a href="https://www.paypal.com/paypalme/TU_USUARIO_DE_PAYPAL" target="_blank" class="submit-button">Pagar con PayPal</a>
+                
                 <button type="submit" class="submit-button">Enviar Solicitud de Mapa</button>
             </div>
         </form>
@@ -657,6 +659,9 @@
                 <label for="pluginDescription">Descripción del plugin:</label>
                 <textarea id="pluginDescription" name="pluginDescription" rows="5" required></textarea>
 
+                <p>Nos pondremos en contacto contigo por Discord para confirmar los detalles y el precio final.</p>
+                <a href="https://www.paypal.com/paypalme/TU_USUARIO_DE_PAYPAL" target="_blank" class="submit-button">Pagar con PayPal</a>
+                
                 <button type="submit" class="submit-button">Enviar Solicitud de Plugin</button>
             </div>
         </form>
