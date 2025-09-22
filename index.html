@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NovaStudio's - Servidores de Minecraft de Calidad Profesional</title>
+    <title>NovaStudio's - Servidores y Mapas de Minecraft de Calidad Profesional</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,16 +13,21 @@
 <body>
 
     <header class="hero-section">
+        <canvas id="minecraftCanvas"></canvas>
         <div class="hero-content">
             <h1>NovaStudio's</h1>
             <p class="tagline">Construimos la experiencia de Minecraft perfecta para tu comunidad, sin lag.</p>
-            <button id="showFormBtn" class="cta-button">¡Pide tu Servidor Ahora!</button>
+            <div class="hero-buttons">
+                <button id="showMapFormBtn" class="cta-button secondary-cta">Pedir Mapa</button>
+                <button id="showServerFormBtn" class="cta-button">Pedir Servidor</button>
+                <button id="showPluginFormBtn" class="cta-button secondary-cta">Pedir Plugin</button>
+            </div>
         </div>
     </header>
 
     <main>
         <section id="services-section" class="section services-grid">
-            <h2>Nuestros Servicios de Creación de Servidores</h2>
+            <h2>Nuestros Servicios de Creación</h2>
             <div class="service-cards">
                 <div class="card">
                     <i class="bi bi-speedometer2"></i>
@@ -60,7 +65,7 @@
             </div>
         </section>
         
-        <form id="orderForm" action="https://script.google.com/macros/s/AKfycbzFmH_hw6CqFdiw4FaG02-G046TcMf3ZkEZeKx0cECAN-YTOfmUNRT2kB36e4ss-wgT/exec" method="POST" style="display: none;">
+        <form id="serverOrderForm" action="https://script.google.com/macros/s/AKfycbzFmH_hw6CqFdiw4FaG02-G046TcMf3ZkEZeKx0cECAN-YTOfmUNRT2kB36e4ss-wgT/exec" method="POST" style="display: none;">
             <div class="form-container">
                 <h2>¡Solicita tu Servidor Personalizado!</h2>
                 <label for="serverName">Nombre del Servidor:</label>
@@ -85,19 +90,109 @@
                     <option value="1.21">1.21</option>
                 </select>
 
-            <label class="modalities-label"><input type="checkbox" name="modalities" value="Survival"><span>Survival</span></label>
+                <label>Modalidades:</label>
                 <div class="modalities-grid">
-                    <label class="modalities-label"><input type="checkbox" name="modalities" value="Survival"> Survival</label>
-                    <label class="modalities-label"><input type="checkbox" name="modalities" value="Creativo"> Creativo</label>
-                    <label class="modalities-label"><input type="checkbox" name="modalities" value="Parkour"> Parkour</label>
-                    <label class="modalities-label"><input type="checkbox" name="modalities" value="Bedwars"> Bedwars</label>
-                    <label class="modalities-label"><input type="checkbox" name="modalities" value="Skyblock"> Skyblock</label>
+                    <label class="modalities-label"><input type="checkbox" name="modalities" value="Survival"><span>Survival</span></label>
+                    <label class="modalities-label"><input type="checkbox" name="modalities" value="Creativo"><span>Creativo</span></label>
+                    <label class="modalities-label"><input type="checkbox" name="modalities" value="Parkour"><span>Parkour</span></label>
+                    <label class="modalities-label"><input type="checkbox" name="modalities" value="Bedwars"><span>Bedwars</span></label>
+                    <label class="modalities-label"><input type="checkbox" name="modalities" value="Skyblock"><span>Skyblock</span></label>
                 </div>
 
-                <label for="description">Descripción del servidor:</label>
-                <textarea id="description" name="description" rows="5" required></textarea>
+                <label for="serverDescription">Descripción del servidor:</label>
+                <textarea id="serverDescription" name="serverDescription" rows="5" required></textarea>
 
-                <button type="submit" class="submit-button">Enviar Solicitud</button>
+                <button type="submit" class="submit-button">Enviar Solicitud de Servidor</button>
+            </div>
+        </form>
+
+        <form id="mapOrderForm" action="https://script.google.com/macros/s/AKfycbya6K-2OA-x6VNjMHpodln0tvozVAjUI4c_O2ug1N5380h2ve6K6u3MW4oJz76el4eWHw/exec" method="POST" style="display: none;">
+            <div class="form-container">
+                <h2>¡Solicita tu Mapa Personalizado!</h2>
+                <label for="mapName">Nombre del Mapa/Proyecto:</label>
+                <input type="text" id="mapName" name="mapName" required>
+
+                <label for="mapVersion">Versión (1.8 - 1.21):</label>
+                <select id="mapVersion" name="mapVersion" required>
+                    <option value="" disabled selected>Selecciona una versión</option>
+                    <option value="1.8">1.8</option>
+                    <option value="1.9">1.9</option>
+                    <option value="1.10">1.10</option>
+                    <option value="1.11">1.11</option>
+                    <option value="1.12">1.12</option>
+                    <option value="1.13">1.13</option>
+                    <option value="1.14">1.14</option>
+                    <option value="1.15">1.15</option>
+                    <option value="1.16">1.16</option>
+                    <option value="1.17">1.17</option>
+                    <option value="1.18">1.18</option>
+                    <option value="1.19">1.19</option>
+                    <option value="1.20">1.20</option>
+                    <option value="1.21">1.21</option>
+                </select>
+
+                <label>Tipo de Construcción:</label>
+                <div class="modalities-grid">
+                    <label class="modalities-label"><input type="checkbox" name="buildType" value="Medieval"><span>Medieval</span></label>
+                    <label class="modalities-label"><input type="checkbox" name="buildType" value="Fantasia"><span>Fantasía</span></label>
+                    <label class="modalities-label"><input type="checkbox" name="buildType" value="Ciberpunk"><span>Ciberpunk</span></label>
+                    <label class="modalities-label"><input type="checkbox" name="buildType" value="Apocaliptico"><span>Apocalíptico</span></label>
+                    <label class="modalities-label"><input type="checkbox" name="buildType" value="Moderno"><span>Moderno</span></label>
+                </div>
+
+                <label>Uso del Mapa:</label>
+                <div class="modalities-grid">
+                    <label class="modalities-label"><input type="radio" name="mapUsage" value="Lobby" required><span>Lobby</span></label>
+                    <label class="modalities-label"><input type="radio" name="mapUsage" value="Spawn Modalidad"><span>Spawn Modalidad</span></label>
+                    <label class="modalities-label"><input type="radio" name="mapUsage" value="Mundo Auth"><span>Mundo Auth</span></label>
+                    <label class="modalities-label"><input type="radio" name="mapUsage" value="Otros"><span>Otros</span></label>
+                </div>
+
+                <label for="mapDescription">Descripción detallada del mapa:</label>
+                <textarea id="mapDescription" name="mapDescription" rows="5" required></textarea>
+
+                <button type="submit" class="submit-button">Enviar Solicitud de Mapa</button>
+            </div>
+        </form>
+
+        <form id="pluginOrderForm" action="https://script.google.com/macros/s/AKfycbyDlm-vp-L302J3dtrjPKwqFSEuiLmIzkW8fmjvzPpzdcXuWCmYIJRNEF1X_ZMMjUWq/exec" method="POST" style="display: none;">
+            <div class="form-container">
+                <h2>¡Solicita tu Plugin Personalizado!</h2>
+                <label for="pluginName">Nombre del Plugin:</label>
+                <input type="text" id="pluginName" name="pluginName" required>
+
+                <label for="pluginVersion">Versión (1.8 - 1.21):</label>
+                <select id="pluginVersion" name="pluginVersion" required>
+                    <option value="" disabled selected>Selecciona una versión</option>
+                    <option value="1.8">1.8</option>
+                    <option value="1.9">1.9</option>
+                    <option value="1.10">1.10</option>
+                    <option value="1.11">1.11</option>
+                    <option value="1.12">1.12</option>
+                    <option value="1.13">1.13</option>
+                    <option value="1.14">1.14</option>
+                    <option value="1.15">1.15</option>
+                    <option value="1.16">1.16</option>
+                    <option value="1.17">1.17</option>
+                    <option value="1.18">1.18</option>
+                    <option value="1.19">1.19</option>
+                    <option value="1.20">1.20</option>
+                    <option value="1.21">1.21</option>
+                </select>
+
+                <label>Tipo de Plugin:</label>
+                <div class="modalities-grid">
+                    <label class="modalities-label"><input type="checkbox" name="pluginType" value="Permisos"><span>Permisos</span></label>
+                    <label class="modalities-label"><input type="checkbox" name="pluginType" value="Economia"><span>Economía</span></label>
+                    <label class="modalities-label"><input type="checkbox" name="pluginType" value="Minijuego"><span>Minijuego</span></label>
+                    <label class="modalities-label"><input type="checkbox" name="pluginType" value="Eventos"><span>Eventos</span></label>
+                    <label class="modalities-label"><input type="checkbox" name="pluginType" value="Anticheat"><span>Anticheat</span></label>
+                </div>
+
+                <label for="pluginDescription">Descripción del plugin:</label>
+                <textarea id="pluginDescription" name="pluginDescription" rows="5" required></textarea>
+
+                <button type="submit" class="submit-button">Enviar Solicitud de Plugin</button>
             </div>
         </form>
     </main>
