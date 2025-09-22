@@ -10,14 +10,25 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #3f51b5;
-            --secondary-color: #4CAF50;
-            --accent-color: #FFC107;
+            --primary-color: #5d6d87;
+            --secondary-color: #3b82f6;
+            --accent-color: #f97316;
             --text-color: #333;
-            --background-color: #f0f2f5;
-            --card-bg-color: #ffffff;
+            --background-color: #e2e8f0;
+            --card-bg-color: #f8fafc;
             --light-gray: #ccc;
             --dark-blue: #2c3e50;
+        }
+
+        body.dark-mode {
+            --primary-color: #94a3b8;
+            --secondary-color: #60a5fa;
+            --accent-color: #f59e0b;
+            --text-color: #e2e8f0;
+            --background-color: #1a202c;
+            --card-bg-color: #2d3748;
+            --light-gray: #4a5568;
+            --dark-blue: #e2e8f0;
         }
 
         body {
@@ -27,6 +38,7 @@
             margin: 0;
             line-height: 1.6;
             overflow-x: hidden;
+            transition: background-color 0.5s, color 0.5s;
         }
 
         .hero-section {
@@ -68,6 +80,16 @@
             font-weight: 400;
         }
 
+        .hero-content .server-info {
+            font-size: clamp(0.9em, 2.5vw, 1.3em);
+            margin-top: 1em;
+            padding: 0.5em 1em;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 10px;
+            display: inline-block;
+            animation: pulse 2s infinite;
+        }
+
         .hero-buttons {
             display: flex;
             flex-wrap: wrap;
@@ -90,18 +112,14 @@
         }
 
         .cta-button:hover {
-            background-color: #45a049;
-            transform: translateY(-3px);
+            background-color: var(--primary-color);
+            transform: translateY(-3px) scale(1.05);
         }
 
         .secondary-cta {
             background-color: var(--accent-color);
         }
-
-        .secondary-cta:hover {
-            background-color: #e0b000;
-        }
-
+        
         main {
             padding: 2em 1em;
             max-width: 1200px;
@@ -111,12 +129,20 @@
         .section {
             text-align: center;
             margin-bottom: 4em;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+        
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .section h2 {
             font-size: 2.5em;
             margin-bottom: 1em;
-            color: var(--dark-blue);
+            color: var(--primary-color);
             position: relative;
             display: inline-block;
         }
@@ -128,6 +154,11 @@
             height: 4px;
             background-color: var(--secondary-color);
             margin: 10px auto 0;
+            transition: width 0.3s;
+        }
+
+        .section h2:hover::after {
+            width: 100px;
         }
 
         .services-grid, .portfolio-grid, .testimonials-grid, .pricing-grid {
@@ -142,20 +173,25 @@
             padding: 2em;
             border-radius: 15px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.5s;
         }
 
         .card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-10px) scale(1.03);
             box-shadow: 0 10px 30px rgba(0,0,0,0.15);
         }
 
         .card i {
             font-size: 3em;
-            color: var(--primary-color);
+            color: var(--secondary-color);
             margin-bottom: 0.5em;
+            transition: transform 0.3s;
         }
-        
+
+        .card:hover i {
+            transform: rotate(10deg);
+        }
+
         .feature-item i {
             font-size: 3em;
             color: var(--secondary-color);
@@ -175,6 +211,7 @@
             max-width: 600px;
             margin: 0 auto;
             animation: fadeIn 1s ease-in-out;
+            transition: background-color 0.5s, box-shadow 0.5s;
         }
 
         .form-container h2 {
@@ -185,7 +222,7 @@
             display: block;
             margin-top: 1em;
             font-weight: bold;
-            color: var(--dark-blue);
+            color: var(--primary-color);
         }
 
         .form-container input[type="text"], 
@@ -197,7 +234,9 @@
             border: 1px solid var(--light-gray);
             border-radius: 8px;
             box-sizing: border-box;
-            transition: border-color 0.3s ease;
+            transition: border-color 0.3s ease, background-color 0.5s, color 0.5s;
+            background-color: var(--background-color);
+            color: var(--text-color);
         }
 
         .form-container input[type="text"]:focus, 
@@ -236,6 +275,7 @@
             background-color: var(--secondary-color);
             color: white;
             border-color: var(--secondary-color);
+            transform: scale(1.05);
         }
 
         .modalities-label span {
@@ -254,7 +294,7 @@
         }
         
         .submit-button {
-            background-color: var(--primary-color);
+            background-color: var(--secondary-color);
             color: white;
             width: 100%;
             padding: 15px;
@@ -269,8 +309,8 @@
         }
 
         .submit-button:hover {
-            background-color: var(--dark-blue);
-            transform: translateY(-3px);
+            background-color: var(--primary-color);
+            transform: translateY(-3px) scale(1.02);
         }
 
         .portfolio-card img {
@@ -287,7 +327,7 @@
             border-radius: 15px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.08);
             border: 2px solid var(--light-gray);
-            transition: border-color 0.3s, transform 0.3s;
+            transition: border-color 0.3s, transform 0.3s, background-color 0.5s;
         }
 
         .pricing-card:hover {
@@ -328,6 +368,7 @@
             border-radius: 15px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.08);
             font-style: italic;
+            transition: background-color 0.5s;
         }
         
         .testimonial-card .client-info {
@@ -355,16 +396,63 @@
             color: white;
             background-color: var(--dark-blue);
             margin-top: 4em;
+            transition: background-color 0.5s;
         }
+
+        .dark-mode-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--card-bg-color);
+            border: none;
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            cursor: pointer;
+            z-index: 100;
+            font-size: 1.5em;
+            transition: background-color 0.5s, transform 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .dark-mode-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .dark-mode-toggle .bi-sun-fill, .dark-mode-toggle .bi-moon-fill {
+            transition: color 0.5s;
+        }
+        
+        body:not(.dark-mode) .dark-mode-toggle .bi-sun-fill {
+            color: var(--text-color);
+        }
+
+        body.dark-mode .dark-mode-toggle .bi-sun-fill {
+            display: none;
+        }
+
+        body.dark-mode .dark-mode-toggle .bi-moon-fill {
+            display: block;
+            color: var(--text-color);
+        }
+
+        body:not(.dark-mode) .dark-mode-toggle .bi-moon-fill {
+            display: none;
+        }
+
 
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
-        @keyframes slideInUp {
-            from { transform: translateY(100%); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
 
         @media (max-width: 768px) {
@@ -384,11 +472,16 @@
     </style>
 </head>
 <body>
+    <button id="darkModeToggle" class="dark-mode-toggle">
+        <i class="bi bi-sun-fill"></i>
+        <i class="bi bi-moon-fill"></i>
+    </button>
     <header class="hero-section">
         <canvas id="minecraftCanvas"></canvas>
         <div class="hero-content">
             <h1>NovaStudio's</h1>
             <p class="tagline">Construimos la experiencia de Minecraft perfecta para tu comunidad, sin lag.</p>
+            <p class="server-info">Servidor Oficial: **novalithmc.funserver.top**</p>
             <div class="hero-buttons">
                 <button id="showMapFormBtn" class="cta-button secondary-cta">Pedir Mapa</button>
                 <button id="showServerFormBtn" class="cta-button">Pedir Servidor</button>
@@ -398,9 +491,9 @@
     </header>
 
     <main>
-        <section id="services-section" class="section services-grid">
+        <section id="services-section" class="section">
             <h2>Nuestros Servicios de Creación</h2>
-            <div class="service-cards">
+            <div class="services-grid">
                 <div class="card">
                     <i class="bi bi-speedometer2"></i>
                     <h3>Optimización de Rendimiento</h3>
@@ -419,7 +512,7 @@
             </div>
         </section>
 
-        <section id="why-us-section" class="section why-us">
+        <section id="why-us-section" class="section">
             <h2>¿Por qué Elegirnos?</h2>
             <div class="why-us-grid">
                 <div class="feature-item">
@@ -497,7 +590,7 @@
         <section id="testimonials-section" class="section">
             <h2>Lo que Dicen Nuestros Clientes</h2>
             <div class="testimonials-grid">
-                </div>
+            </div>
         </section>
         
         <form id="serverOrderForm" action="https://script.google.com/macros/s/AKfycbzFmH_hw6CqFdiw4FaG02-G046TcMf3ZkEZeKx0cECAN-YTOfmUNRT2kB36e4ss-wgT/exec" method="POST" style="display: none;">
@@ -557,9 +650,6 @@
                 <label for="serverDescription">Descripción del servidor:</label>
                 <textarea id="serverDescription" name="serverDescription" rows="5" required></textarea>
                 
-                <p>Nos pondremos en contacto contigo por Discord para confirmar los detalles y el precio final.</p>
-                <a href="https://www.paypal.com/paypalme/TU_USUARIO_DE_PAYPAL" target="_blank" class="submit-button">Pagar con PayPal</a>
-                
                 <button type="submit" class="submit-button">Enviar Solicitud de Servidor</button>
             </div>
         </form>
@@ -612,9 +702,6 @@
                 <label for="mapDescription">Descripción detallada del mapa:</label>
                 <textarea id="mapDescription" name="mapDescription" rows="5" required></textarea>
 
-                <p>Nos pondremos en contacto contigo por Discord para confirmar los detalles y el precio final.</p>
-                <a href="https://www.paypal.com/paypalme/TU_USUARIO_DE_PAYPAL" target="_blank" class="submit-button">Pagar con PayPal</a>
-                
                 <button type="submit" class="submit-button">Enviar Solicitud de Mapa</button>
             </div>
         </form>
@@ -659,9 +746,6 @@
                 <label for="pluginDescription">Descripción del plugin:</label>
                 <textarea id="pluginDescription" name="pluginDescription" rows="5" required></textarea>
 
-                <p>Nos pondremos en contacto contigo por Discord para confirmar los detalles y el precio final.</p>
-                <a href="https://www.paypal.com/paypalme/TU_USUARIO_DE_PAYPAL" target="_blank" class="submit-button">Pagar con PayPal</a>
-                
                 <button type="submit" class="submit-button">Enviar Solicitud de Plugin</button>
             </div>
         </form>
@@ -756,6 +840,45 @@
             buttons.server.addEventListener('click', () => showForm('server'));
             buttons.map.addEventListener('click', () => showForm('map'));
             buttons.plugin.addEventListener('click', () => showForm('plugin'));
+
+            const darkModeToggle = document.getElementById('darkModeToggle');
+            const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+
+            // Load saved preference
+            const currentTheme = localStorage.getItem("theme");
+            if (currentTheme) {
+                document.body.classList.toggle("dark-mode", currentTheme === "dark");
+            } else if (prefersDarkScheme.matches) {
+                document.body.classList.add("dark-mode");
+            }
+
+            darkModeToggle.addEventListener('click', () => {
+                document.body.classList.toggle('dark-mode');
+                let theme = "light";
+                if (document.body.classList.contains("dark-mode")) {
+                    theme = "dark";
+                }
+                localStorage.setItem("theme", theme);
+            });
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.section').forEach(section => {
+                observer.observe(section);
+            });
         });
     </script>
 </body>
