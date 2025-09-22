@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NovaStudio's - Servidores de Minecraft</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <h1>NovaStudio's</h1>
+        <p>Creando la experiencia de Minecraft perfecta para tu comunidad.</p>
+    </header>
+
+    <main>
+        <section class="services">
+            <h2>Nuestros Servicios</h2>
+            <ul>
+                <li>✅ Servidores sin lag y completamente optimizados.</li>
+                <li>🛠️ Creación de plugins personalizados para características únicas.</li>
+                <li>🖼️ Diseño de lobbies y mapas personalizados.</li>
+                <li>🚀 Asesoramiento y soporte para tu proyecto.</li>
+            </ul>
+            <button id="showFormBtn">Pedir Servidor</button>
+        </section>
+        
+        <form id="orderForm" action="" method="POST" style="display: none;">
+            <h2>Configura tu Servidor</h2>
+            <label for="serverName">Nombre del Servidor:</label>
+            <input type="text" id="serverName" name="serverName" required>
+
+            <label for="serverVersion">Versión (1.8 - 1.21):</label>
+            <select id="serverVersion" name="serverVersion" required>
+                <option value="1.8">1.8</option>
+                <option value="1.9">1.9</option>
+                <option value="1.10">1.10</option>
+                <option value="1.11">1.11</option>
+                <option value="1.12">1.12</option>
+                <option value="1.13">1.13</option>
+                <option value="1.14">1.14</option>
+                <option value="1.15">1.15</option>
+                <option value="1.16">1.16</option>
+                <option value="1.17">1.17</option>
+                <option value="1.18">1.18</option>
+                <option value="1.19">1.19</option>
+                <option value="1.20">1.20</option>
+                <option value="1.21">1.21</option>
+            </select>
+
+            <label>Modalidades:</label>
+            <div class="modalities">
+                <input type="checkbox" id="survival" name="modalities" value="Survival">
+                <label for="survival">Survival</label>
+
+                <input type="checkbox" id="creative" name="modalities" value="Creativo">
+                <label for="creative">Creativo</label>
+
+                <input type="checkbox" id="parkour" name="modalities" value="Parkour">
+                <label for="parkour">Parkour</label>
+
+                <input type="checkbox" id="bedwars" name="modalities" value="Bedwars">
+                <label for="bedwars">Bedwars</label>
+
+                <input type="checkbox" id="skyblock" name="modalities" value="Skyblock">
+                <label for="skyblock">Skyblock</label>
+            </div>
+
+            <label for="description">Descripción del servidor:</label>
+            <textarea id="description" name="description" rows="5" required></textarea>
+
+            <button type="submit">Enviar Solicitud</button>
+        </form>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 NovaStudio's. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
