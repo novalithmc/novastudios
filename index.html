@@ -10,25 +10,29 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #5d6d87;
-            --secondary-color: #3b82f6;
-            --accent-color: #f97316;
+            --primary-color: #2e7d32; /* Verde esmeralda */
+            --secondary-color: #4CAF50; /* Verde brillante */
+            --accent-color: #FFC107; /* Amarillo dorado */
             --text-color: #333;
-            --background-color: #e2e8f0;
-            --card-bg-color: #f8fafc;
-            --light-gray: #ccc;
-            --dark-blue: #2c3e50;
+            --background-color: #f0fdf4; /* Verde muy claro */
+            --card-bg-color: #ffffff;
+            --light-gray: #e0e0e0;
+            --dark-blue: #1b5e20; /* Verde oscuro */
+            --gradient-start: #4CAF50;
+            --gradient-end: #66BB6A;
         }
 
         body.dark-mode {
-            --primary-color: #94a3b8;
-            --secondary-color: #60a5fa;
-            --accent-color: #f59e0b;
-            --text-color: #e2e8f0;
-            --background-color: #1a202c;
-            --card-bg-color: #2d3748;
-            --light-gray: #4a5568;
-            --dark-blue: #e2e8f0;
+            --primary-color: #81C784; /* Verde esmeralda claro */
+            --secondary-color: #A5D6A7; /* Verde brillante claro */
+            --accent-color: #FFEB3B; /* Amarillo dorado brillante */
+            --text-color: #e0e0e0;
+            --background-color: #212121; /* Gris oscuro */
+            --card-bg-color: #303030; /* Gris más oscuro */
+            --light-gray: #424242;
+            --dark-blue: #424242; /* Gris oscuro para footer */
+            --gradient-start: #424242;
+            --gradient-end: #616161;
         }
 
         body {
@@ -45,6 +49,7 @@
             background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://novalithmc.github.io/novastudios/assets/images/header-bg.jpg') no-repeat center center/cover;
             height: 100vh;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             color: white;
@@ -68,26 +73,40 @@
             position: relative;
             z-index: 2;
             animation: fadeIn 2s ease-in-out;
+            max-width: 90%;
         }
 
         .hero-content h1 {
             font-size: clamp(2.5em, 8vw, 4.5em);
             margin-bottom: 0.2em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
 
         .hero-content .tagline {
             font-size: clamp(1em, 3vw, 1.5em);
             font-weight: 400;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
         }
 
         .hero-content .server-info {
             font-size: clamp(0.9em, 2.5vw, 1.3em);
             margin-top: 1em;
             padding: 0.5em 1em;
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.6);
             border-radius: 10px;
             display: inline-block;
             animation: pulse 2s infinite;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        
+        #serverStatusDisplay {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-top: 1em;
+            padding: 1em;
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
 
         .hero-buttons {
@@ -99,7 +118,7 @@
         }
 
         .cta-button {
-            background-color: var(--secondary-color);
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
             color: white;
             padding: 15px 30px;
             border: none;
@@ -107,17 +126,24 @@
             font-size: 1.1em;
             font-weight: 700;
             cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.3s ease;
+            transition: all 0.3s ease;
             box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .cta-button:hover {
-            background-color: var(--primary-color);
-            transform: translateY(-3px) scale(1.05);
+            background: linear-gradient(135deg, var(--gradient-end), var(--gradient-start));
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
         }
 
         .secondary-cta {
-            background-color: var(--accent-color);
+            background: linear-gradient(135deg, var(--accent-color), #FFECB3);
+        }
+        .secondary-cta:hover {
+             background: linear-gradient(135deg, #FFECB3, var(--accent-color));
         }
         
         main {
@@ -128,99 +154,131 @@
 
         .section {
             text-align: center;
-            margin-bottom: 4em;
+            margin-bottom: 6em;
             opacity: 0;
-            transform: translateY(50px);
-            transition: opacity 1s ease-out, transform 1s ease-out;
+            transform: translateY(80px) scale(0.95);
+            transition: opacity 1.2s ease-out, transform 1.2s ease-out;
         }
         
         .section.visible {
             opacity: 1;
-            transform: translateY(0);
+            transform: translateY(0) scale(1);
         }
 
         .section h2 {
-            font-size: 2.5em;
-            margin-bottom: 1em;
+            font-size: clamp(2em, 5vw, 3em);
+            margin-bottom: 1.5em;
             color: var(--primary-color);
             position: relative;
             display: inline-block;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
 
         .section h2::after {
             content: '';
             display: block;
-            width: 60px;
-            height: 4px;
-            background-color: var(--secondary-color);
-            margin: 10px auto 0;
-            transition: width 0.3s;
+            width: 80px;
+            height: 5px;
+            background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
+            margin: 15px auto 0;
+            border-radius: 5px;
+            transition: width 0.4s ease-in-out;
         }
 
         .section h2:hover::after {
-            width: 100px;
+            width: 120px;
         }
 
         .services-grid, .portfolio-grid, .testimonials-grid, .pricing-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2em;
-            margin-top: 2em;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5em;
+            margin-top: 2.5em;
         }
 
         .card {
             background-color: var(--card-bg-color);
-            padding: 2em;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.5s;
+            padding: 2.5em;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+            border: 1px solid var(--light-gray);
         }
 
         .card:hover {
-            transform: translateY(-10px) scale(1.03);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            transform: translateY(-15px) scale(1.04);
+            box-shadow: 0 15px 45px rgba(0,0,0,0.2);
+            border-color: var(--secondary-color);
         }
 
         .card i {
-            font-size: 3em;
+            font-size: 3.5em;
             color: var(--secondary-color);
-            margin-bottom: 0.5em;
-            transition: transform 0.3s;
+            margin-bottom: 0.6em;
+            transition: transform 0.4s ease, color 0.4s ease;
         }
 
         .card:hover i {
-            transform: rotate(10deg);
+            transform: rotate(15deg) scale(1.1);
+            color: var(--primary-color);
         }
 
         .feature-item i {
-            font-size: 3em;
+            font-size: 3.5em;
             color: var(--secondary-color);
-            margin-bottom: 0.5em;
+            margin-bottom: 0.6em;
         }
 
         .feature-item p {
-            font-size: 1.1em;
+            font-size: 1.2em;
             font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .why-us-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2em;
+            margin-top: 2em;
+        }
+        .why-us-grid .feature-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 250px;
+            padding: 1.5em;
+            border-radius: 15px;
+            background-color: var(--card-bg-color);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+        .why-us-grid .feature-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
         }
 
         .form-container {
             background-color: var(--card-bg-color);
-            padding: 2em;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-            max-width: 600px;
+            padding: 2.5em;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            max-width: 650px;
             margin: 0 auto;
-            animation: fadeIn 1s ease-in-out;
-            transition: background-color 0.5s, box-shadow 0.5s;
+            animation: fadeIn 1.2s ease-in-out;
+            transition: background-color 0.5s, box-shadow 0.5s, border-color 0.5s;
+            border: 1px solid var(--light-gray);
         }
 
         .form-container h2 {
             margin-top: 0;
+            color: var(--primary-color);
+            font-size: 2em;
         }
 
         .form-container label {
             display: block;
-            margin-top: 1em;
+            margin-top: 1.5em;
             font-weight: bold;
             color: var(--primary-color);
         }
@@ -229,14 +287,15 @@
         .form-container select, 
         .form-container textarea {
             width: 100%;
-            padding: 12px;
-            margin-top: 0.5em;
+            padding: 14px;
+            margin-top: 0.8em;
             border: 1px solid var(--light-gray);
-            border-radius: 8px;
+            border-radius: 10px;
             box-sizing: border-box;
-            transition: border-color 0.3s ease, background-color 0.5s, color 0.5s;
+            transition: border-color 0.3s ease, background-color 0.5s, color 0.5s, box-shadow 0.3s ease;
             background-color: var(--background-color);
             color: var(--text-color);
+            font-size: 1em;
         }
 
         .form-container input[type="text"]:focus, 
@@ -244,11 +303,12 @@
         .form-container textarea:focus {
             border-color: var(--secondary-color);
             outline: none;
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.3); /* Sombra verde */
         }
 
         .modalities-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
             gap: 1em;
             margin-top: 1em;
         }
@@ -256,13 +316,20 @@
         .modalities-label {
             cursor: pointer;
             border: 2px solid var(--light-gray);
-            padding: 12px;
-            border-radius: 8px;
-            transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+            padding: 14px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
             font-weight: normal;
             text-align: center;
             position: relative;
             user-select: none;
+            color: var(--text-color);
+            background-color: var(--background-color);
+        }
+
+        .modalities-label:hover {
+            border-color: var(--primary-color);
+            background-color: rgba(76, 175, 80, 0.1);
         }
 
         .modalities-label input[type="checkbox"],
@@ -272,10 +339,11 @@
 
         .modalities-label input[type="checkbox"]:checked + span,
         .modalities-label input[type="radio"]:checked + span {
-            background-color: var(--secondary-color);
+            background-color: var(--primary-color);
             color: white;
-            border-color: var(--secondary-color);
+            border-color: var(--primary-color);
             transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(46, 125, 50, 0.3);
         }
 
         .modalities-label span {
@@ -291,135 +359,163 @@
             font-size: 1.2em;
             color: white;
             margin-left: 0.5em;
+            animation: popIn 0.3s ease-out;
         }
         
         .submit-button {
-            background-color: var(--secondary-color);
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
             width: 100%;
-            padding: 15px;
+            padding: 18px;
             border: none;
             border-radius: 50px;
-            font-size: 1.2em;
+            font-size: 1.3em;
             font-weight: 700;
             cursor: pointer;
-            margin-top: 2em;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            margin-top: 3em;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .submit-button:hover {
-            background-color: var(--primary-color);
-            transform: translateY(-3px) scale(1.02);
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.35);
         }
 
         .portfolio-card img {
             width: 100%;
-            border-radius: 10px;
+            height: 200px;
+            border-radius: 15px;
             object-fit: cover;
             margin-bottom: 1em;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        .portfolio-card:hover img {
+            transform: scale(1.02);
         }
         
         .pricing-card {
             background-color: var(--card-bg-color);
-            padding: 2em;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            padding: 2.5em;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
             border: 2px solid var(--light-gray);
-            transition: border-color 0.3s, transform 0.3s, background-color 0.5s;
+            transition: all 0.4s ease;
         }
 
         .pricing-card:hover {
-            border-color: var(--secondary-color);
-            transform: scale(1.05);
+            border-color: var(--primary-color);
+            transform: scale(1.05) translateY(-10px);
+            box-shadow: 0 15px 45px rgba(0,0,0,0.2);
         }
 
         .pricing-card h3 {
             color: var(--primary-color);
+            font-size: 1.8em;
+            margin-bottom: 0.8em;
         }
 
         .pricing-card .price {
-            font-size: 2.5em;
+            font-size: 3em;
             font-weight: 700;
             margin: 0.5em 0;
             color: var(--secondary-color);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
 
         .pricing-card ul {
             list-style: none;
             padding: 0;
             text-align: left;
+            margin-top: 1.5em;
         }
 
         .pricing-card li {
-            margin-bottom: 0.5em;
+            margin-bottom: 0.8em;
             font-size: 1.1em;
+            display: flex;
+            align-items: center;
         }
 
         .pricing-card li i {
-            margin-right: 0.5em;
+            margin-right: 0.8em;
             color: var(--secondary-color);
+            font-size: 1.3em;
         }
         
         .testimonial-card {
             background-color: var(--card-bg-color);
-            padding: 2em;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            padding: 2.5em;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
             font-style: italic;
-            transition: background-color 0.5s;
+            transition: background-color 0.5s, transform 0.3s;
+            border: 1px solid var(--light-gray);
+        }
+        .testimonial-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.15);
         }
         
         .testimonial-card .client-info {
             display: flex;
             align-items: center;
-            margin-top: 1em;
+            margin-top: 1.5em;
         }
 
         .testimonial-card img {
-            width: 60px;
-            height: 60px;
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
             margin-right: 1em;
-            border: 3px solid var(--secondary-color);
+            border: 4px solid var(--secondary-color);
+            object-fit: cover;
         }
 
         .testimonial-card .client-name {
             font-weight: bold;
             font-style: normal;
+            color: var(--primary-color);
+            font-size: 1.1em;
         }
 
         footer {
             text-align: center;
-            padding: 2em 1em;
+            padding: 3em 1em;
             color: white;
             background-color: var(--dark-blue);
-            margin-top: 4em;
+            margin-top: 6em;
             transition: background-color 0.5s;
+            font-size: 0.9em;
         }
 
         .dark-mode-toggle {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 50px;
-            height: 50px;
+            bottom: 25px;
+            right: 25px;
+            width: 55px;
+            height: 55px;
             background-color: var(--card-bg-color);
             border: none;
             border-radius: 50%;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.25);
             cursor: pointer;
             z-index: 100;
-            font-size: 1.5em;
-            transition: background-color 0.5s, transform 0.3s;
+            font-size: 1.6em;
+            transition: background-color 0.5s, transform 0.3s, color 0.5s;
             display: flex;
             align-items: center;
             justify-content: center;
+            color: var(--text-color);
         }
 
         .dark-mode-toggle:hover {
-            transform: scale(1.1);
+            transform: scale(1.15) rotate(10deg);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.35);
         }
 
         .dark-mode-toggle .bi-sun-fill, .dark-mode-toggle .bi-moon-fill {
@@ -427,7 +523,7 @@
         }
         
         body:not(.dark-mode) .dark-mode-toggle .bi-sun-fill {
-            color: var(--text-color);
+            color: var(--accent-color);
         }
 
         body.dark-mode .dark-mode-toggle .bi-sun-fill {
@@ -436,7 +532,7 @@
 
         body.dark-mode .dark-mode-toggle .bi-moon-fill {
             display: block;
-            color: var(--text-color);
+            color: var(--primary-color);
         }
 
         body:not(.dark-mode) .dark-mode-toggle .bi-moon-fill {
@@ -444,29 +540,48 @@
         }
 
 
+        /* Keyframe Animations */
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
         
         @keyframes pulse {
             0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            80% { transform: scale(1.2); opacity: 1; }
             100% { transform: scale(1); }
         }
 
         @media (max-width: 768px) {
             .section h2 {
-                font-size: 2em;
+                font-size: clamp(1.8em, 7vw, 2.5em);
             }
 
             .hero-content h1 {
-                font-size: clamp(2em, 6vw, 3.5em);
+                font-size: clamp(2em, 7vw, 4em);
             }
             
             .hero-buttons {
                 flex-direction: column;
                 align-items: center;
+            }
+
+            .cta-button {
+                width: 80%;
+                padding: 12px 20px;
+                font-size: 1em;
+            }
+            .why-us-grid .feature-item {
+                width: 100%;
+            }
+            .form-container {
+                padding: 1.5em;
             }
         }
     </style>
@@ -481,11 +596,16 @@
         <div class="hero-content">
             <h1>NovaStudio's</h1>
             <p class="tagline">Construimos la experiencia de Minecraft perfecta para tu comunidad, sin lag.</p>
-            <p class="server-info">Servidor Oficial: **novalithmc.funserver.top**</p>
+            <div class="server-info">
+                <p>Servidor Oficial: <strong>novalithmc.funserver.top</strong></p>
+                <div id="serverStatusDisplay">Cargando estado del servidor...</div>
+            </div>
+            
             <div class="hero-buttons">
                 <button id="showMapFormBtn" class="cta-button secondary-cta">Pedir Mapa</button>
                 <button id="showServerFormBtn" class="cta-button">Pedir Servidor</button>
                 <button id="showPluginFormBtn" class="cta-button secondary-cta">Pedir Plugin</button>
+                <a href="TU_LINK_DE_DISCORD_AQUI" target="_blank" class="cta-button">Unirse a Discord</a>
             </div>
         </div>
     </header>
@@ -590,6 +710,27 @@
         <section id="testimonials-section" class="section">
             <h2>Lo que Dicen Nuestros Clientes</h2>
             <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p>"NovaStudio's transformó mi servidor. La optimización es increíble y mis jugadores nunca han estado más contentos. ¡Totalmente recomendados!"</p>
+                    <div class="client-info">
+                        <img src="https://novalithmc.github.io/novastudios/assets/images/client1.png" alt="Cliente 1">
+                        <span class="client-name">Alex M. - Propietario de Servidor</span>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p>"Pedí un lobby personalizado y el resultado superó mis expectativas. El nivel de detalle es impresionante y la entrega fue muy rápida."</p>
+                    <div class="client-info">
+                        <img src="https://novalithmc.github.io/novastudios/assets/images/client2.png" alt="Cliente 2">
+                        <span class="client-name">Sofía G. - Builder</span>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p>"El plugin que desarrollaron para mi minijuego es perfecto. Funciona sin problemas y añade justo lo que necesitábamos. Gran trabajo técnico."</p>
+                    <div class="client-info">
+                        <img src="https://novalithmc.github.io/novastudios/assets/images/client3.png" alt="Cliente 3">
+                        <span class="client-name">Carlos P. - Desarrollador</span>
+                    </div>
+                </div>
             </div>
         </section>
         
@@ -760,8 +901,30 @@
             const canvas = document.getElementById('minecraftCanvas');
             const ctx = canvas.getContext('2d');
             let cubes = [];
-            const numCubes = 100;
-            const colors = ['#A9D18E', '#D1C28E', '#8EBCD1', '#D18E8E', '#A98ED1'];
+            const numCubes = 150; // Más cubos
+            const colors = ['#A9D18E', '#D1C28E', '#8EBCD1', '#D18E8E', '#A98ED1', '#B0D9B1', '#E6E6B8', '#9CCEEB']; // Más colores
+            const cubeImages = []; // Para imágenes de cubos si quieres usar texturas de Minecraft
+            const imagePaths = [
+                'https://novalithmc.github.io/novastudios/assets/images/grass_block_side.png',
+                'https://novalithmc.github.io/novastudios/assets/images/dirt.png',
+                'https://novalithmc.github.io/novastudios/assets/images/stone.png',
+                // Puedes añadir más si quieres
+            ];
+
+            // Cargar imágenes de cubos
+            let imagesLoaded = 0;
+            imagePaths.forEach((path, index) => {
+                const img = new Image();
+                img.src = path;
+                img.onload = () => {
+                    cubeImages[index] = img;
+                    imagesLoaded++;
+                    if (imagesLoaded === imagePaths.length) {
+                        createCubes();
+                        animate();
+                    }
+                };
+            });
 
             function resizeCanvas() {
                 canvas.width = window.innerWidth;
@@ -774,11 +937,13 @@
                     cubes.push({
                         x: Math.random() * canvas.width,
                         y: Math.random() * canvas.height,
-                        size: Math.random() * 20 + 5,
-                        speed: Math.random() * 1 + 0.5,
+                        size: Math.random() * 25 + 10, // Tamaño más variado
+                        speed: Math.random() * 1.5 + 0.8, // Velocidad más variada
                         color: colors[Math.floor(Math.random() * colors.length)],
                         rotation: Math.random() * 360,
-                        rotationSpeed: (Math.random() - 0.5) * 0.1
+                        rotationSpeed: (Math.random() - 0.5) * 0.2, // Rotación más variada
+                        image: cubeImages.length > 0 ? cubeImages[Math.floor(Math.random() * cubeImages.length)] : null,
+                        opacity: Math.random() * 0.5 + 0.3 // Opacidad para un efecto más etéreo
                     });
                 }
             }
@@ -789,8 +954,13 @@
                     ctx.save();
                     ctx.translate(cube.x, cube.y);
                     ctx.rotate(cube.rotation * Math.PI / 180);
-                    ctx.fillStyle = cube.color;
-                    ctx.fillRect(-cube.size / 2, -cube.size / 2, cube.size, cube.size);
+                    ctx.globalAlpha = cube.opacity; // Aplicar opacidad
+                    if (cube.image) {
+                        ctx.drawImage(cube.image, -cube.size / 2, -cube.size / 2, cube.size, cube.size);
+                    } else {
+                        ctx.fillStyle = cube.color;
+                        ctx.fillRect(-cube.size / 2, -cube.size / 2, cube.size, cube.size);
+                    }
                     ctx.restore();
                 });
             }
@@ -802,6 +972,12 @@
                     if (cube.y > canvas.height) {
                         cube.y = -cube.size;
                         cube.x = Math.random() * canvas.width;
+                        cube.speed = Math.random() * 1.5 + 0.8; // Resetear velocidad
+                        cube.rotationSpeed = (Math.random() - 0.5) * 0.2; // Resetear rotación
+                        cube.opacity = Math.random() * 0.5 + 0.3; // Resetear opacidad
+                        if (cubeImages.length > 0) {
+                            cube.image = cubeImages[Math.floor(Math.random() * cubeImages.length)];
+                        }
                     }
                 });
             }
@@ -814,8 +990,11 @@
 
             window.addEventListener('resize', resizeCanvas);
             resizeCanvas();
-            createCubes();
-            animate();
+            // Llama a createCubes y animate solo después de que las imágenes se hayan cargado
+            if (imagePaths.length === 0) { // Si no hay imágenes, crea y anima directamente
+                createCubes();
+                animate();
+            }
             
             const forms = {
                 server: document.getElementById('serverOrderForm'),
@@ -844,7 +1023,6 @@
             const darkModeToggle = document.getElementById('darkModeToggle');
             const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
 
-            // Load saved preference
             const currentTheme = localStorage.getItem("theme");
             if (currentTheme) {
                 document.body.classList.toggle("dark-mode", currentTheme === "dark");
@@ -871,7 +1049,11 @@
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('visible');
-                        observer.unobserve(entry.target);
+                        // No desobservar si quieres que la animación se repita al volver a la vista
+                        // observer.unobserve(entry.target); 
+                    } else {
+                         // Opcional: remover la clase visible si sale de la vista
+                         // entry.target.classList.remove('visible');
                     }
                 });
             }, observerOptions);
@@ -879,6 +1061,35 @@
             document.querySelectorAll('.section').forEach(section => {
                 observer.observe(section);
             });
+            
+            // Función para obtener el estado del servidor
+            async function fetchServerStatus() {
+                const statusDisplay = document.getElementById('serverStatusDisplay');
+                const serverIp = 'novalithmc.funserver.top';
+                const apiUrl = `https://api.mcstatus.io/v2/status/java/${serverIp}`;
+                
+                try {
+                    const response = await fetch(apiUrl);
+                    const data = await response.json();
+
+                    if (data.online) {
+                        statusDisplay.innerHTML = `
+                            <p style="color: #A5D6A7;">Estado: En línea</p>
+                            <p>Versión: ${data.version.name_clean}</p>
+                            <p>Jugadores: ${data.players.online}/${data.players.max}</p>
+                        `;
+                    } else {
+                        statusDisplay.innerHTML = `<p style="color: #EF5350;">Estado: Fuera de línea</p>`;
+                    }
+                } catch (error) {
+                    console.error('Error al obtener el estado del servidor:', error);
+                    statusDisplay.innerHTML = `<p style="color: #EF5350;">No se pudo conectar al servidor.</p>`;
+                }
+            }
+
+            // Llama a la función al cargar la página y cada 30 segundos
+            fetchServerStatus();
+            setInterval(fetchServerStatus, 30000);
         });
     </script>
 </body>
