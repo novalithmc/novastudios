@@ -1,34 +1,14 @@
-<!DOCTYPE html>  
-<html lang="es">  
-<head>  
-  <meta charset="UTF-8" />  
-  <meta name="viewport" content="width=device-width, initial-scale=1" />  
-  <title>NovaStudio's - Servidores Minecraft</title>  
-  <style>  
-    :root{  
-      --bg: #0b1020;  
-      --card: #141a28;  
-      --text: #e8f0ff;  
-      --muted: #a3aecb;  
-      --accent: #7bd389;  
-      --radius: 14px;  
-    }  
-
-    * { box-sizing: border-box; }  
-    html, body { height: 100%; margin: 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background: #0b0f1a; color: var(--text); }  
-
-    .container { width: min(1100px, 92%); margin: 0 auto; padding: 1rem 0; }  
-
-    .site-header { position: sticky; top: 0; z-index: 50; backdrop-filter: saturate(1.2) blur(6px); background: rgba(10,12,20,.8); border-bottom: 1px solid rgba(255,255,255,.08); }  
-    .brand { font-weight: 800; letter-spacing: .5px; }  
-    .menu { list-style: none; display: flex; gap: 1rem; padding: 0; margin: 0; }  
-    .menu a { color: var(--text); text-decoration: none; padding: .5rem; border-radius: 6px; }  
-    .menu a:hover { background: rgba(255,255,255,.08); }  
-
-    .hero { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 2rem; align-items: center; padding: 2.5rem 0; }  
-    .hero-card { padding: 2rem; border-radius: var(--radius); background: linear-gradient(135deg, rgba(20,25,40,.95), rgba(20,25,40,.75)); border: 1px solid rgba(255,255,255,.08); transform: translateY(20px); opacity: 0; transition: transform .6s cubic-bezier(.22,.8,.32,1), opacity .6s ease; }  
-    .hero-visual { height: 260px; display: grid; place-items: center; border-radius: var(--radius); background: linear-gradient(135deg, rgba(12,14,24,.92), rgba(8,12,20,.92)); border: 1px solid rgba(255,255,255,.08); transform: translateY(20px); opacity: 0; transition: transform .6s cubic-bezier(.22,.8,.32,1), opacity .6s ease; }  
-    .visual-art { width: 120px; height: 120px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #7bd389, #2b8e5d); box-shadow: 0 6px 20px rgba(0,0,0,.4); }  
-
-    .cta { display: inline-block; padding: .9rem 1.25rem; border-radius: 999px; background: linear-gradient(135deg, #5bd3a2, #1db954); color: #062a18; font-weight: 700; text-decoration: none; border: 0; cursor: pointer; }  
-    .cta:hover { transform: translateY(-1px
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Fira+Code:wght@300..700&family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400..700;1,400..700&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Outfit:wght@100..900&family=Oxanium:wght@200..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto:ital,wght@0,100..900;1,100..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&family=Space+Grotesk:wght@300..700&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
